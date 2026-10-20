@@ -1,0 +1,13 @@
+.git
+.github
+.venv
+__pycache__
+*.py[cod]
+models
+data
+bin
+.env
+.DS_Store
+preview.png
+start.bat
+*.log
