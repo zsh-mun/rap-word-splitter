@@ -2,6 +2,10 @@
 
 把一个演讲视频拆成「一个词一个片段」的素材库。适合做 RAP 鬼畜、词汇混剪、押韵采样和短视频二创。
 
+[GitHub 仓库](https://github.com/zsh-mun/rap-word-splitter) · [用 Render 一键部署](https://render.com/deploy?repo=https://github.com/zsh-mun/rap-word-splitter)
+
+![CI](https://github.com/zsh-mun/rap-word-splitter/actions/workflows/ci.yml/badge.svg)
+
 ![界面预览](preview.png)
 
 ## 它做什么
@@ -22,8 +26,8 @@ GitHub Pages 只能托管静态 HTML/CSS/JS，不能运行 Whisper、Python 或 
 
 仓库里已经包含 `render.yaml` 和 `Dockerfile`。
 
-1. 把这个仓库推到你的 GitHub。
-2. 打开 [Render](https://render.com/)，新建 **Blueprint**，选择这个仓库。
+1. 仓库已经在 GitHub：[zsh-mun/rap-word-splitter](https://github.com/zsh-mun/rap-word-splitter)。
+2. 打开 [Render 部署链接](https://render.com/deploy?repo=https://github.com/zsh-mun/rap-word-splitter)，登录后按 Blueprint 创建服务。
 3. Render 会读取 `render.yaml`，创建一个 Docker Web Service。
 4. 部署时建议设置 `SITE_PASSWORD`（站点访问口令）；不设置就是公开站点。
 5. 部署完成后打开 Render 给出的网址。
