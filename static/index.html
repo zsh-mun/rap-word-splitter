@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>词切 · RAP 素材机</title>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div class="ambient ambient-one" aria-hidden="true"></div>
+  <div class="ambient ambient-two" aria-hidden="true"></div>
+  <div class="grid-noise" aria-hidden="true"></div>
+
+  <div class="auth-gate hidden" id="authGate">
+    <div class="auth-card">
+      <div class="brand-mark auth-brand-mark" aria-hidden="true">
+        <span></span><span></span><span></span><span></span>
+      </div>
+      <p class="eyebrow">PRIVATE INSTANCE</p>
+      <h1>输入访问口令</h1>
+      <p class="auth-sub">这个站点开启了访问保护。口令由部署者设置。</p>
+      <form class="auth-form" id="authForm">
+        <label class="auth-label" for="authPassword">访问口令</label>
+        <input type="password" id="authPassword" placeholder="访问口令" autocomplete="current-password" required>
+        <button class="primary" type="submit" id="authButton">进入素材机</button>
+      </form>
+      <p class="auth-error hidden" id="authError"></p>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="词切首页">
+      <span class="brand-mark" aria-hidden="true">
+        <span></span><span></span><span></span><span></span>
+      </span>
+      <span class="brand-text">词切<small>RAP 素材机</small></span>
+    </a>
+    <div class="header-meta">
+      <span class="status-dot"></span>
+      隐私优先 · 任务自动清理
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">WORD-BY-WORD VIDEO CUTTER</p>
+        <h1>把一段演讲，<br><span>拆成押韵的积木。</span></h1>
+        <p class="lede">
+          上传视频，自动逐词识别、切片、用词命名。每个词都是一块能直接拖进时间线的素材。
+        </p>
+
+        <div class="word-stack" aria-hidden="true">
+          <div class="stack-card stack-one">
+            <span class="stack-index">001</span>
+            <strong>我</strong>
+            <span class="stack-play"></span>
+          </div>
+          <div class="stack-card stack-two">
+            <span class="stack-index">002</span>
+            <strong>喜欢</strong>
+            <span class="stack-play"></span>
+          </div>
+          <div class="stack-card stack-three">
+            <span class="stack-index">003</span>
+            <strong>旅游</strong>
+            <span class="stack-play"></span>
+          </div>
+          <div class="stack-caption">一句话 → 三个可循环的节奏点</div>
+        </div>
+
+        <ul class="feature-row">
+          <li><span>01</span>逐词时间点</li>
+          <li><span>02</span>内容自动命名</li>
+          <li><span>03</span>MP4 + WAV</li>
+        </ul>
+      </div>
+
+      <div class="upload-card">
+        <div class="card-top">
+          <span>新建素材库</span>
+          <span class="card-badge">STEP 01</span>
+        </div>
+
+        <div class="dropzone" id="dropzone" role="button" tabindex="0" aria-label="选择视频文件">
+          <input type="file" id="fileInput" accept=".mp4,.mov,.mkv,.webm,.avi,.m4v,.flv,.wmv,.ts,.mp3,.wav,.m4a,.aac,.flac,.ogg,video/*,audio/*" hidden>
+          <div class="drop-icon" aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <p class="drop-title">把视频拖到这里</p>
+          <p class="drop-sub">或点击选择文件 · 建议 2GB 以内</p>
+          <div class="file-chip" id="fileChip" hidden>
+            <span class="file-dot"></span>
+            <span class="file-name" id="fileName"></span>
+            <span class="file-size" id="fileSize"></span>
+            <button class="file-remove" id="fileRemove" type="button" aria-label="移除文件">×</button>
+          </div>
+        </div>
+
+        <div class="settings-grid">
+          <label class="field">
+            <span>识别模型</span>
+            <select id="modelSelect">
+              <option value="small" selected>Small · 推荐</option>
+              <option value="base">Base · 轻量</option>
+              <option value="tiny">Tiny · 最快</option>
+              <option value="medium">Medium · 更准但慢</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>语音语言</span>
+            <select id="languageSelect">
+              <option value="zh" selected>中文普通话</option>
+              <option value="auto">自动判断</option>
+              <option value="en">英语</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>切分粒度</span>
+            <select id="granularitySelect">
+              <option value="word" selected>按词 · 推荐</option>
+              <option value="char">按字 · 更碎</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>前后留白</span>
+            <select id="paddingSelect">
+              <option value="0.03">30 ms · 紧</option>
+              <option value="0.06" selected>60 ms · 稳</option>
+              <option value="0.10">100 ms · 宽松</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>导出内容</span>
+            <select id="formatSelect">
+              <option value="video" selected>MP4 视频</option>
+              <option value="both">MP4 + WAV</option>
+              <option value="audio">只导出 WAV</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>视频画质</span>
+            <select id="qualitySelect">
+              <option value="720p" selected>720p · 速度快</option>
+              <option value="original">保持原画质</option>
+              <option value="1080p">1080p</option>
+            </select>
+          </label>
+        </div>
+
+        <label class="check-line">
+          <input type="checkbox" id="autoCutCheck" checked>
+          <span>识别完直接切片</span>
+          <small>取消勾选可先校对词表</small>
+        </label>
+
+        <button class="primary start-button" id="startButton" disabled>
+          开始拆词
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5"/></svg>
+        </button>
+        <p class="upload-hint">默认 Small 模型已随程序准备好；词与词黏在一起时会自动收窄留白，避免串进相邻词。</p>
+      </div>
+    </section>
+
+    <section class="processing panel hidden" id="processing">
+      <div class="process-card">
+        <div class="process-top">
+          <div class="process-orb" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div class="process-copy">
+            <p class="eyebrow" id="processEyebrow">PROCESSING</p>
+            <h2 id="processTitle">正在拆词</h2>
+            <p id="processMessage">正在读取视频信息…</p>
+          </div>
+          <div class="process-percent" id="processPercent">0%</div>
+        </div>
+        <div class="progress-track" aria-hidden="true">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <div class="step-row" id="stepRow">
+          <div class="step" data-step="probe"><span>01</span>读取</div>
+          <div class="step" data-step="extract"><span>02</span>提取音轨</div>
+          <div class="step" data-step="transcribe"><span>03</span>逐词识别</div>
+          <div class="step" data-step="cutting"><span>04</span>切片</div>
+          <div class="step" data-step="done"><span>05</span>打包</div>
+        </div>
+        <div class="error-box hidden" id="processError">
+          <strong id="errorTitle">处理失败</strong>
+          <p id="errorText"></p>
+          <button class="ghost small" id="errorReset" type="button">重新选择视频</button>
+        </div>
+        <p class="process-note">音视频只在这台电脑上处理。首次使用某个模型时，需要先下载模型文件。</p>
+      </div>
+    </section>
+
+    <section class="results hidden" id="results">
+      <div class="results-head">
+        <div>
+          <p class="eyebrow">YOUR WORD BANK</p>
+          <h2 id="resultTitle">词库已就绪</h2>
+          <p class="result-sub" id="resultSub"></p>
+        </div>
+        <div class="result-actions">
+          <button class="ghost" id="newJobButton" type="button">换一个视频</button>
+          <a class="primary small" id="downloadZip" href="#" download>下载全部 ZIP</a>
+        </div>
+      </div>
+
+      <div class="stats" id="stats"></div>
+
+      <div class="toolbar">
+        <div class="search-wrap">
+          <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="m13 13 4 4"/></svg>
+          <input type="search" id="searchInput" placeholder="搜词、搜原句…" autocomplete="off">
+        </div>
+        <div class="filter-group" id="filterGroup" role="group" aria-label="筛选词片">
+          <button type="button" data-filter="all" class="active">全部</button>
+          <button type="button" data-filter="repeat">重复词</button>
+          <button type="button" data-filter="low">低置信度</button>
+        </div>
+        <div class="toolbar-actions">
+          <button class="ghost" id="copyWordsButton" type="button">复制词表</button>
+          <button class="ghost" id="editWordsButton" type="button">编辑词表</button>
+        </div>
+      </div>
+
+      <div class="transcript-bar">
+        <span>识别文本</span>
+        <p id="transcriptText"></p>
+        <button type="button" id="copyTranscriptButton">复制</button>
+      </div>
+
+      <div class="clip-grid" id="clipGrid"></div>
+      <div class="empty-state hidden" id="emptyResults">
+        <span>0</span>
+        <p>没有找到匹配的词</p>
+        <small>换个关键词，或点「全部」看看。</small>
+      </div>
+      <div class="load-more-wrap">
+        <button class="ghost hidden" id="loadMoreButton" type="button">加载更多</button>
+      </div>
+      <p class="results-footnote" id="resultsFootnote"></p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>词切 · RAP 素材机</span>
+    <span>任务处理 · 不改原视频 · 词表可编辑</span>
+  </footer>
+
+  <div class="modal hidden" id="mediaModal" role="dialog" aria-modal="true" aria-labelledby="mediaWord">
+    <div class="modal-backdrop" data-close="mediaModal"></div>
+    <div class="modal-card media-card">
+      <button class="modal-close" type="button" data-close="mediaModal" aria-label="关闭">×</button>
+      <div class="media-preview" id="mediaPreview"></div>
+      <div class="media-info">
+        <p class="eyebrow">WORD CLIP</p>
+        <h3 id="mediaWord">词</h3>
+        <p class="media-time" id="mediaTime"></p>
+        <p class="media-sentence" id="mediaSentence"></p>
+        <div class="media-downloads" id="mediaDownloads"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal hidden" id="editorModal" role="dialog" aria-modal="true" aria-labelledby="editorTitle">
+    <div class="modal-backdrop" data-close="editorModal"></div>
+    <div class="modal-card editor-card">
+      <header class="editor-head">
+        <div>
+          <p class="eyebrow">WORD EDITOR</p>
+          <h2 id="editorTitle">校对词表</h2>
+          <p>改字、改时间、合并或删除，再重新切片。时间单位是秒；留白会自动避让相邻词。</p>
+        </div>
+        <button class="modal-close inline" type="button" data-close="editorModal" aria-label="关闭">×</button>
+      </header>
+
+      <div class="editor-toolbar">
+        <div class="editor-search">
+          <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="m13 13 4 4"/></svg>
+          <input type="search" id="editorSearch" placeholder="定位词语或原句…" autocomplete="off">
+        </div>
+        <div class="editor-bulk">
+          <button class="ghost small" id="mergeSelectedButton" type="button">合并选中</button>
+          <button class="ghost small danger" id="deleteSelectedButton" type="button">删除选中</button>
+          <span class="toolbar-divider"></span>
+          <button class="ghost small" id="resegmentWordButton" type="button">按词重建</button>
+          <button class="ghost small" id="resegmentCharButton" type="button">按字重建</button>
+        </div>
+        <div class="recut-options">
+          <label>留白
+            <select id="editorPadding">
+              <option value="0.03">30 ms</option>
+              <option value="0.06" selected>60 ms</option>
+              <option value="0.10">100 ms</option>
+            </select>
+          </label>
+          <label>导出
+            <select id="editorFormat">
+              <option value="video">MP4</option>
+              <option value="both">MP4 + WAV</option>
+              <option value="audio">WAV</option>
+            </select>
+          </label>
+          <label>画质
+            <select id="editorQuality">
+              <option value="720p">720p</option>
+              <option value="original">原画质</option>
+              <option value="1080p">1080p</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <div class="editor-table-wrap">
+        <table class="editor-table">
+          <thead>
+            <tr>
+              <th class="check-col"><input type="checkbox" id="selectAllCheck" aria-label="全选"></th>
+              <th class="num-col">#</th>
+              <th>词</th>
+              <th>开始</th>
+              <th>结束</th>
+              <th>置信度</th>
+              <th>原句</th>
+            </tr>
+          </thead>
+          <tbody id="editorBody"></tbody>
+        </table>
+      </div>
+
+      <footer class="editor-foot">
+        <span id="editorCount">0 个词</span>
+        <div class="editor-foot-actions">
+          <button class="ghost" type="button" data-close="editorModal">取消</button>
+          <button class="primary" id="saveRecutButton" type="button">保存并重新切片</button>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <div class="toasts" id="toasts" aria-live="polite"></div>
+  <noscript><div class="noscript">这个页面需要启用 JavaScript。</div></noscript>
+  <script src="/static/app.js"></script>
+</body>
+</html>
